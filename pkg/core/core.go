@@ -195,7 +195,7 @@ func (comic *Comic) makeEPUB() error {
 func (comic *Comic) makePDF() error {
 	var err error
 	// setup the pdf
-	pdf := gofpdf.New("P", "mm", "A4", "")
+	pdf := gofpdf.New("L", "mm", "A4", "")
 	// setup the progress bar
 	bar := progressbar.NewOptions(len(comic.Links), progressbar.OptionSetRenderBlankState(true))
 	// for each link get the image to add to the pdf file
@@ -216,7 +216,7 @@ func (comic *Comic) makePDF() error {
 			imageOptions := gofpdf.ImageOptions{ImageType: tp, ReadDpi: true, AllowNegativePosition: false}
 			pdf.RegisterImageOptionsReader(link, imageOptions, content)
 			// set the image position on the pdf page
-			pdf.Image(link, 0, 0, 210, 297, false, tp, 0, "")
+			pdf.Image(link, 0, 0, 297, 210, false, tp, 0, "")
 			// increase the progressbar
 		}
 		if barErr := bar.Add(1); barErr != nil {
